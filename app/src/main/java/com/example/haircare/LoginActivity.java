@@ -1,5 +1,9 @@
 package com.example.haircare;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +27,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+
 import java.util.concurrent.TimeUnit;
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText txtPhoneNumber;
     private Button btnLogin;
     private FirebaseAuth mAuth;
+
+    private TextView tvSigninWithOther;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +49,13 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        tvSigninWithOther.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToHuaweiActivity();
+            }
+        });
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,10 +64,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
     private void initUI(){
         txtPhoneNumber = findViewById(R.id.txtPhoneNummber);
         btnLogin = findViewById(R.id.btnLogin);
+        tvSigninWithOther = findViewById(R.id.SigninWithOther);
     }
 
     private void onClickVerifyPhoneNumber(String strPhoneNumber) {
@@ -118,6 +133,11 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent( this, MainActivity.class);
                intent.putExtra("phone_number",phoneNumber);
                startActivity(intent);
+
+    }
+    private void goToHuaweiActivity() {
+        Intent intent = new Intent( this, LoginHuaweiActivity.class);
+        startActivity(intent);
 
     }
 
