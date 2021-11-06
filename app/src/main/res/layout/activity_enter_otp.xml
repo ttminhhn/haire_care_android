@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EnterOtpActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Verify OTP"
+        android:textColor="@color/black"
+        android:textSize="35dp"
+        android:layout_margin="50dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:id="@+id/VerifyOtp"
+        />
+
+    <EditText
+        android:id="@+id/txtOtpCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/VerifyOtp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:drawablePadding="20dp"
+        android:hint="OTP CODE"
+        android:padding="20dp"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/sendOtpAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnSendOtpCode"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:text="I didn't receive otp code" />
+
+    <Button
+        android:id="@+id/btnSendOtpCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtOtpCode"
+        android:layout_marginLeft="165dp"
+        android:layout_marginTop="150dp"
+        android:textColor="@color/white"
+        android:text="Send"
+        android:background="@drawable/customcircle_button"
+        android:gravity="center" />
+
+</RelativeLayout>

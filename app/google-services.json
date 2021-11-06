@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "777562379317",
+    "project_id": "sendotp-2a873",
+    "storage_bucket": "sendotp-2a873.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777562379317:android:092e36929a41444f82cd7c",
+        "android_client_info": {
+          "package_name": "com.example.haircare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777562379317-dcsk3sj181f972kds9da3ctmic9emqbl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.haircare",
+            "certificate_hash": "fbf0b24c142b01d9496c6a2f2cab5f423c45d816"
+          }
+        },
+        {
+          "client_id": "777562379317-5dcvq38r3v00b5npebo76o5ocig0uh5a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0TD4sHuPmvVsfVmsPfxHLW6SNzS3H_Xs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777562379317-5dcvq38r3v00b5npebo76o5ocig0uh5a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
