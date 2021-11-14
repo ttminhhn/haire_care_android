@@ -47,7 +47,7 @@ public class LoginHuaweiActivity extends AppCompatActivity {
                     Task<AuthAccount> authAccountTask = AccountAuthManager.parseAuthResultFromIntent(data);
                     if(authAccountTask.isSuccessful()){
                         Toast.makeText(LoginHuaweiActivity.this, "Đăng nhập thành công:", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginHuaweiActivity.this, MainActivity.class));
+                        startActivity(new Intent(LoginHuaweiActivity.this, HomeActivity.class));
                     }else {
                         Toast.makeText(LoginHuaweiActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
                     }

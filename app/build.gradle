@@ -62,4 +62,7 @@ dependencies {
     // Add dependencies.
     implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
     implementation 'com.huawei.hms:hwid:6.1.0.302'
+    // Add recyclerview
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    implementation "androidx.cardview:cardview:1.0.0"
 }

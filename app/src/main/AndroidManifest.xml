@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Haircare">
         <activity
+            android:name=".HomeActivity"
+            android:exported="true" />
+        <activity
             android:name=".LoginHuaweiActivity"
             android:exported="true" />
         <activity
