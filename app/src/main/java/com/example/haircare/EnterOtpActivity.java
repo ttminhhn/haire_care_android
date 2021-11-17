@@ -40,25 +40,45 @@ public class EnterOtpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_otp);
 
-        setTitleToolbar();
-
         getDataIntent();
 
         initUI();
 
         mAuth = FirebaseAuth.getInstance();
 
+        SetListenerActivity();
+
+    }
+
+    private void SetListenerActivity() {
         btnSendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String strOtpCode = txtOtpCode.getText().toString().trim();
-                onClicksendOtpCode(strOtpCode);
+                if(strOtpCode!= null)
+                {
+                    onClicksendOtpCode(strOtpCode);
+                }
+                else
+                {
+                    Toast.makeText(  EnterOtpActivity.this,
+                            "You can not send wrong otp",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         tvSendOtpAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClicksendOtpCodeAgain();
+                if(checkCode())
+                {
+                    Toast.makeText(  EnterOtpActivity.this,
+                            "You can not send wrong otp",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    onClicksendOtpCodeAgain();
+                }
             }
         });
     }
@@ -102,7 +122,6 @@ public class EnterOtpActivity extends AppCompatActivity {
                             @Override
                             public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                                 super.onCodeSent(verificationId, forceResendingToken);
-
                                 mVerificationId = verificationId;
                                 mForceResendingToken = forceResendingToken;
 
@@ -115,9 +134,11 @@ public class EnterOtpActivity extends AppCompatActivity {
 
     private void onClicksendOtpCode(String strOtpCode) {
 
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId,strOtpCode);
-        signInWithPhoneAuthCredential(credential);
-
+        if(mVerificationId != null)
+        {
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId,strOtpCode);
+            signInWithPhoneAuthCredential(credential);
+        }
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
@@ -132,7 +153,7 @@ public class EnterOtpActivity extends AppCompatActivity {
                             FirebaseUser user = task.getResult().getUser();
                             // Update UI
 
-                            goToMainActivity(user.getPhoneNumber());
+                            goToSetPassActivity(user.getPhoneNumber());
 
                         } else {
                             // Sign in failed, display a message and update the UI
@@ -152,5 +173,20 @@ public class EnterOtpActivity extends AppCompatActivity {
         intent.putExtra("phone_number",phoneNumber);
         startActivity(intent);
 
+    }
+    private boolean checkCode() {
+        if (txtOtpCode.getText().toString().isEmpty()) {
+            btnSendOtp.setEnabled(true);
+            return true;
+        } else {
+            btnSendOtp.setEnabled(false);
+            return false;
+        }
+    }
+    private void goToSetPassActivity(String phoneNumber) {
+        Intent intent = new Intent( this, SetPassWordActivity.class);
+        intent.putExtra("phone_number",phoneNumber);
+        startActivity(intent);
+        finish();
     }
 }
