@@ -1,9 +1,5 @@
 package com.example.haircare;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.haircare.Model.Config;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -27,6 +30,8 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+
+import org.json.JSONArray;
 
 import java.util.concurrent.TimeUnit;
 
@@ -43,12 +48,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        setTitleToolbar();
+        //setTitleToolbar();
 
         initUI();
 
         mAuth = FirebaseAuth.getInstance();
 
+        SetListenerActivity();
+    }
+
+    private void SetListenerActivity() {
         tvSigninWithOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,19 +68,45 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String strPhoneNumber = txtPhoneNumber.getText().toString().trim();
-                onClickVerifyPhoneNumber(strPhoneNumber);
+                SetNext();
             }
         });
     }
-    private void initUI(){
-        txtPhoneNumber = findViewById(R.id.txtPhoneNummber);
-        btnLogin = findViewById(R.id.btnLogin);
-        tvSigninWithOther = findViewById(R.id.SigninWithOther);
+
+    private void SetNext()
+    {
+        String strPhoneNumber = txtPhoneNumber.getText().toString().trim();
+        String url = Config.LOCALHOST + "GetCheckUser.php?UserName=" +strPhoneNumber;
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null
+                , new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if (response.length() == 0) {
+                    onClickVerifyPhoneNumber(strPhoneNumber);
+                } else {
+                    try {
+                        //String pass = response.getJSONObject(0).getString("Password");
+                        //goToLoginWithPass(pass);
+                        Toast.makeText(  LoginActivity.this,
+                                "The verification code entered was invalid",Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, error.toString());
+            }
+        });
+
+        requestQueue.add(request);
     }
 
-    private void onClickVerifyPhoneNumber(String strPhoneNumber) {
 
+    private void onClickVerifyPhoneNumber(String strPhoneNumber) {
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
                         .setPhoneNumber(strPhoneNumber)       // Phone number to verify
@@ -90,7 +125,8 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                            public void onCodeSent(@NonNull String verificationId,
+                                                   @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                                 super.onCodeSent(verificationId, forceResendingToken);
 
                                 goToEnterOtpActivity(strPhoneNumber,verificationId);
@@ -100,7 +136,6 @@ public class LoginActivity extends AppCompatActivity {
                         .build();
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
-
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
@@ -135,6 +170,7 @@ public class LoginActivity extends AppCompatActivity {
                startActivity(intent);
 
     }
+
     private void goToHuaweiActivity() {
         Intent intent = new Intent( this, LoginHuaweiActivity.class);
         startActivity(intent);
@@ -148,10 +184,14 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void goToLoginWithPass( String pass)
+    {
 
-    private void setTitleToolbar(){
-        if(getSupportActionBar() != null){
-            getSupportActionBar().setTitle("Login Activity");
-        }
+    }
+
+    private void initUI(){
+        txtPhoneNumber = findViewById(R.id.txtPhoneNummber);
+        btnLogin = findViewById(R.id.btnLogin);
+        tvSigninWithOther = findViewById(R.id.SigninWithOther);
     }
 }
