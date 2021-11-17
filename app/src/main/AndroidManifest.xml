@@ -13,8 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Haircare">
         <activity
-            android:name=".HomeActivity"
+            android:name=".Activities.Booking.HistoryCutActivity"
             android:exported="true" />
+        <activity
+            android:name=".Activities.Booking.BookingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".LoginHuaweiActivity"
             android:exported="true" />
@@ -26,13 +38,7 @@
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

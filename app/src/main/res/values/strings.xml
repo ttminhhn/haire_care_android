@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Haircare</string>
+    <string name="back">Back</string>
+    <string name="dat_lich_cat_toc">Đặt lịch cắt tóc</string>
+    <string name="chon_dich_vu_va_thoi_gian">1. Chọn dịch vụ và thời gian</string>
+    <string name="success">Hoàn Tất</string>
+    <string name="chon_tien_ich_free">2. Chọn tiện ích miễn phí</string>
+    <string name="check_box_tien_ich_item_1">Bỏ bớt thời gian gội, cắt sớm</string>
+    <string name="check_box_tien_ich_item_2">Da dễ kích ứng</string>
+    <string name="check_box_tien_ich_item_3">Hỏi kĩ trong khi cắt</string>
+    <string name="check_box_tien_ich_item_4">Hướng dẫn vuôt sáp tại nhà</string>
+    <string name="check_box_tien_ich_item_5">Tư vấn cắt tóc mới</string>
+    <string name="check_box_tien_ich_item_6">Cắt - giũa móng tay</string>
+    <string name="chon_dich_vu">Chọn dịch vụ</string>
+    <string name="swich_yeu_cau_tu_van">Yêu cầu tư vấn</string>
+    <string name="swich_chup_anh_sau_cat">Chụp Ảnh Sau Khi Cắt</string>
+    <string name="hello_blank_fragment">Đây là fragment</string>
+    <string name="tab_layout_cat_goi_massage">Cắt gội massage</string>
+    <string name="tab_layout_uon">Uốn</string>
+    <string name="tab_layout_nhuom">Nhuộm</string>
+    <string name="tab_layout_dich_vu_khac">Dịch vụ khác</string>
+    <string name="chi_tiet">Chi tiết</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
